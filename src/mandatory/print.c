@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/07 11:10:49 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/11/07 11:10:49 by lannur-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
-void print_push_swap_data(t_push_swap_data* data) 
+void print_ps_data(t_ps_data* data) 
 {
     printf("Stack A: ");
-    t_list_node* current = data->stackA.top;
+    t_node* current = data->stack_a.top;
     while (current != NULL) {
         printf("%d ", current->data);
         current = current->next;
@@ -11,12 +23,12 @@ void print_push_swap_data(t_push_swap_data* data)
     printf("\n");
 
     printf("Stack B: ");
-    current = data->stackB.top;
+    current = data->stack_b.top;
     while (current != NULL) {
         printf("%d ", current->data);
         current = current->next;
     }
     printf("\n");
 
-    printf("LIS Length: %d\n", data->lisLength);
+    printf("LIS Length: %d\n", data->lis_length);
 }

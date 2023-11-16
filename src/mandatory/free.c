@@ -1,24 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/07 11:10:41 by lannur-s          #+#    #+#             */
+/*   Updated: 2023/11/07 11:10:41 by lannur-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
-void free_push_swap_data(t_push_swap_data *data) 
+void free_ps_data(t_ps_data *data) 
 {
-    t_list_node *current = data->head;
+    t_node *current = data->head;
     while (current != NULL) {
-        t_list_node *temp = current;
+        t_node *temp = current;
         current = current->next;
         free(temp);
     }
 
     // Free remaining stack nodes if any
-    while (data->stackA.top != NULL) {
-        t_list_node *temp = data->stackA.top;
-        data->stackA.top = data->stackA.top->next;
+    while (data->stack_a.top != NULL) {
+        t_node *temp = data->stack_a.top;
+        data->stack_a.top = data->stack_a.top->next;
         free(temp);
     }
 
-    while (data->stackB.top != NULL) {
-        t_list_node *temp = data->stackB.top;
-        data->stackB.top = data->stackB.top->next;
+    while (data->stack_b.top != NULL) {
+        t_node *temp = data->stack_b.top;
+        data->stack_b.top = data->stack_b.top->next;
         free(temp);
     }
 

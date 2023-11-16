@@ -26,9 +26,9 @@ INCLUDES = -I./include -I$(LIBFT_DIR)/include
 
 SRCS = src/mandatory/push_swap.c \
 		src/mandatory/validator.c \
-		src/mandatory/initialize.c \
-		src/mandatory/free.c \
-		src/mandatory/print.c \
+#		src/mandatory/initialize.c \
+#		src/mandatory/free.c \
+#		src/mandatory/print.c \
 
 BONUS_SRCS = src/bonus/checker.c \
 		
