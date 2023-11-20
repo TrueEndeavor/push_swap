@@ -39,6 +39,7 @@ INCLUDES = -I./include
 SRCS = src/conversion/ft_atoi.c \
 		src/conversion/ft_atol.c \
 		src/conversion/ft_itoa.c \
+		src/conversion/ft_strtol.c \
 		src/ctype/ft_isalnum.c \
 		src/ctype/ft_isalpha.c \
 		src/ctype/ft_isascii.c \

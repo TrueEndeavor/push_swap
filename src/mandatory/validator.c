@@ -83,6 +83,8 @@ int	is_not_number(char *input_value)
 
 	len = ft_strlen(input_value);
 	i = 1;
+	dprintf(1, "len=%zu\n", len);
+	dprintf(1, "input_value=%s\n", input_value);
 	if ((input_value[0] == '+' || input_value[0] == '-'))
 	{
 		if (len == 1)
@@ -92,6 +94,7 @@ int	is_not_number(char *input_value)
 		return (1);
 	while (i < len)
 	{
+		dprintf(1, "checking digit = input_value[%ld] ... ft_isdigit(input_value[%hhd]= %d)\n", i, input_value[i], ft_isdigit(input_value[i]));
 		if (!ft_isdigit(input_value[i]))
 			return (1);
 		i++;

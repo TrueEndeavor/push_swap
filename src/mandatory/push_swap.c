@@ -14,23 +14,32 @@
 
 void	initialize_stack_a(t_list **stack_a, int ac, char **av)
 {
+	int		size;
 	int		index;
+	char	**arg;
+	char    *endptr;
 
-	index = ac - 1;
-	dprintf(1, "av[%d] %s\n", index, av[index]);
+	size = 0;
+	index = 0;
+	arg = NULL;
 	if (ac == 2)
 	{
-		if (av[1] != NULL && (is_not_number(av[1]) || is_overflow(av[1])))
+		arg = ft_split(av[1], ' ');
+		while (arg[size] != NULL)
+			size++;
+		dprintf(1, "Try 1: arg[%d] %ld\n", index, ft_strtol(arg[index], &endptr, 10));
+		if (arg[index] != NULL && (ft_strtol(arg[index], &endptr, 10)))
 		{
 			write(STDERR_FILENO, "Error\n", 6);
 			exit(EXIT_SUCCESS);
 		}
-		if (av[1] != NULL)
-			create_and_add_to_list(stack_a, 1, av, 0);
+		if (arg[index] != NULL)
+			create_and_add_to_list(stack_a, index, av, 0);
+		index++;
 	}
-	while (ac >= 3 && index != 0)
+	while (ac >= 3)
 	{
-		dprintf(1, "av[%d] %s\n", index, av[index]);
+	dprintf(1, "Try 1: >3: av[%d] %s\n", index, av[index]);	
 		if (is_not_number(av[index]) || is_overflow(av[index]))
 		{
 			write(STDERR_FILENO, "Error\n", 6);
@@ -63,12 +72,10 @@ void	create_and_add_to_list(t_list **stack_a, int size, char **av, int i)
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	t_list	*stack_b;
-	int		size;
+	//t_list	*stack_b;
 
 	stack_a = NULL;
-	stack_b = NULL;
-	size = 0;
+	//stack_b = NULL;
 	if (ac == 1)
 		exit (EXIT_SUCCESS);
 	else

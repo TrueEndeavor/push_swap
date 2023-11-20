@@ -25,6 +25,8 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+# define FT_LONG_MAX 9223372036854775807
+
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		ft_isalpha(int c);
@@ -53,6 +55,7 @@ char	*ft_strdup(const char *string);
 
 int		ft_atoi(const char *str);
 long	ft_atol(const char *str);
+long	ft_strtol(const char *nptr, char **endptr, int base);
 char	*ft_itoa(int n);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
