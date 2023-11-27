@@ -26,7 +26,11 @@ INCLUDES = -I./include -I$(LIBFT_DIR)/include
 
 SRCS = src/mandatory/push_swap.c \
 		src/mandatory/validator.c \
-#		src/mandatory/initialize.c \
+		src/mandatory/operations/generic_ops.c \
+		src/mandatory/operations/wrapper_push.c \
+		src/mandatory/operations/wrapper_reverse_rotate.c \
+		src/mandatory/operations/wrapper_rotate.c \
+		src/mandatory/operations/wrapper_swap.c		
 #		src/mandatory/free.c \
 #		src/mandatory/print.c \
 

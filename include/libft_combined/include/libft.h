@@ -16,16 +16,19 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <limits.h>
+# include <errno.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
+
+# define C_LONG_MAX 9223372036854775807
+# define C_LONG_MIN LONG_MIN
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
-# define FT_LONG_MAX 9223372036854775807
 
 int		ft_isascii(int c);
 int		ft_isprint(int c);
@@ -55,7 +58,7 @@ char	*ft_strdup(const char *string);
 
 int		ft_atoi(const char *str);
 long	ft_atol(const char *str);
-long	ft_strtol(const char *nptr, char **endptr, int base);
+long	ft_strtol(const char *restrict nptr, char **restrict endptr, int base);
 char	*ft_itoa(int n);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -69,6 +72,8 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+float	ft_power(int nb, int exp);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

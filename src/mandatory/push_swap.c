@@ -27,8 +27,8 @@ void	initialize_stack_a(t_list **stack_a, int ac, char **av)
 		arg = ft_split(av[1], ' ');
 		while (arg[size] != NULL)
 			size++;
-		dprintf(1, "Try 1: arg[%d] %ld\n", index, ft_strtol(arg[index], &endptr, 10));
-		if (arg[index] != NULL && (ft_strtol(arg[index], &endptr, 10)))
+//		dprintf(1, "Try 1: arg[%d] %ld\n", index, ft_strtol(arg[index], &endptr, 10));
+		if (arg[index] != NULL && (!ft_strtol(arg[index], &endptr, 10)))
 		{
 			write(STDERR_FILENO, "Error\n", 6);
 			exit(EXIT_SUCCESS);
@@ -37,28 +37,30 @@ void	initialize_stack_a(t_list **stack_a, int ac, char **av)
 			create_and_add_to_list(stack_a, index, av, 0);
 		index++;
 	}
-	while (ac >= 3)
+	index++;
+	while (ac >= 3 && index < ac)
 	{
-	dprintf(1, "Try 1: >3: av[%d] %s\n", index, av[index]);	
-		if (is_not_number(av[index]) || is_overflow(av[index]))
+//	dprintf(1, "Try 1: >3: av[%d] %ld\n", index, ft_strtol(av[index], &endptr, 10));	
+		if (av[index] != NULL && (!ft_strtol(av[index], &endptr, 10)))
 		{
 			write(STDERR_FILENO, "Error\n", 6);
 			exit(EXIT_SUCCESS);
 		}
 		create_and_add_to_list(stack_a, index, av, 1);
-		index--;
+		index++;
 	}
 }
 
 void	create_and_add_to_list(t_list **stack_a, int size, char **av, int i)
 {
-	t_list	*tmp;
+	t_list *tmp;
+	int     value;
 
 	tmp = NULL;
-	(void) av;
 	while (i < size)
 	{
-		//tmp = ft_lstnew((void *)ft_atoi(argv[i]));
+		value = ft_atoi(av[i]);
+		tmp = ft_lstnew(&value);
 		ft_lstadd_back(stack_a, tmp);
 		//ft_lstcheck(*stack_a, tmp->content);
 		i++;
@@ -72,7 +74,7 @@ void	create_and_add_to_list(t_list **stack_a, int size, char **av, int i)
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	//t_list	*stack_b;
+	//t_stack	stack_b;
 
 	stack_a = NULL;
 	//stack_b = NULL;

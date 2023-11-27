@@ -67,6 +67,7 @@ SRCS = src/conversion/ft_atoi.c \
 		src/linkedlist/ft_lstnew.c \
 		src/linkedlist/ft_lstclear.c \
 		src/linkedlist/ft_lstsize.c \
+		src/math/ft_power.c \
 		src/memory/ft_bzero.c \
 		src/memory/ft_calloc.c \
 		src/memory/ft_memchr.c \
