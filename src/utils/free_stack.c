@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   free_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/12 18:06:39 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/05/18 12:53:09 by lannur-s         ###   ########.fr       */
+/*   Created: 2024/01/11 20:48:54 by marvin            #+#    #+#             */
+/*   Updated: 2024/01/11 20:48:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <push_swap.h>
 
-void	ft_lstiter(t_list *lst, void (*f)(int *))
+void	free_stack(t_list **stack)
 {
-	if (lst == NULL)
+	t_list	*tmp;
+
+	if (*stack == NULL)
 		return ;
-	while (lst != NULL)
+	tmp = *stack;
+	while (*stack != NULL)
 	{
-		f(&lst->content);
-		lst = lst->next;
+		tmp = (*stack)->next;
+		free (*stack);
+		*stack = tmp;
 	}
 }

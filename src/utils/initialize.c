@@ -12,55 +12,51 @@
 
 #include <push_swap.h>
 
-void	initialize_ps_data(void)
+void	check_duplicate(t_list *stack_a, int value_to_check)
 {
-	t_ps_data	*data;
-dprintf(1, "%lu\n", sizeof(t_ps_data));
-	data = (t_ps_data *)malloc(sizeof(t_ps_data));
-	if (data == NULL)
+	while (stack_a->next != NULL)
 	{
-		//return (NULL);
+		if (stack_a->content == value_to_check)
+			exit (EXIT_SUCCESS);
+		stack_a = stack_a->next;
 	}
-	*data->stack_a.top = NULL;
-	*data->stack_a.bottom = NULL;
-	*data->stack_a.size = 0;
-
-	data->stack_b.top = NULL;
-	data->stack_b.bottom = NULL;
-	data->stack_b.size = 0;
-
-	data->head = NULL;
-	data->lis_length = 0;
+	return ;
 }
 
-t_ps_data	*load_ps_data(int ac, char **av)
+void	check_sorted(t_list **stack_a)
 {
-    initialize_ps_data();
- 	for (int i = ac - 1; i >= 1; i--) {
-        t_node* new_node = create_new_node(atoi(av[i]));
+	t_list	*tmp;
+	t_list	*tmp2;
 
-        // Add the new node to stackA
-        if (data->stack_a.top == NULL) {
-            data->stack_a.top = new_node;
-            data->stack_a.bottom = new_node;
-        } else {
-            new_node->next = data->stack_a.top;
-            data->stack_a.top = new_node;
-        }
-        data->stack_a.size++;
-    }
-    return data;
+	tmp = *stack_a;
+	tmp2 = tmp->next;
+	while (tmp2 != NULL)
+	{
+		if (tmp->content > tmp2->content)
+			return ;
+		tmp = tmp->next;
+		tmp2 = tmp2->next;
+	}
+	exit(0);
 }
 
-t_node *create_new_node(int data) 
+void	create_and_add_to_list(t_list **stack_a, int ac, char **av, int index)
 {
-    t_node *new_node = (t_node *)malloc(sizeof(t_node));
-    if (new_node == NULL) {
-        // Handle memory allocation failure
-        return NULL;
-    }
-    new_node->data = data;
-    new_node->lis = 0; // Initialize lis to 0
-    new_node->next = NULL;
-    return new_node;
+	t_list *tmp;
+	int     value;
+
+	tmp = NULL;
+	dprintf(1, "...ac=%d\n", ac);
+	dprintf(1, "...index=%d\n", index);	
+	while (index < ac)
+	{	
+		value = ft_atoi_push_swap(av[index]);
+		tmp = ft_lstnew(value);
+		ft_lstadd_back(stack_a, tmp);
+		check_duplicate(*stack_a, tmp->content);
+		index++;
+	}
+	check_sorted(stack_a);
+	//ft_lst_inverted(stack_a);
+	tmp = NULL;
 }

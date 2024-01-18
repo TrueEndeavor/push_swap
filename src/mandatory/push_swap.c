@@ -15,77 +15,70 @@
 void	initialize_stack_a(t_list **stack_a, int ac, char **av)
 {
 	int		size;
-	int		index;
-	char	**arg;
-	char    *endptr;
+	char	**split_args;
 
 	size = 0;
-	index = 0;
-	arg = NULL;
+	split_args = NULL;
 	if (ac == 2)
 	{
-		arg = ft_split(av[1], ' ');
-		while (arg[size] != NULL)
-			size++;
-//		dprintf(1, "Try 1: arg[%d] %ld\n", index, ft_strtol(arg[index], &endptr, 10));
-		if (arg[index] != NULL && (!ft_strtol(arg[index], &endptr, 10)))
+		split_args = ft_split(av[1], ' ');
+		if (split_args != NULL)
 		{
-			write(STDERR_FILENO, "Error\n", 6);
-			exit(EXIT_SUCCESS);
+			while (split_args[size] != NULL)
+				size++;
+			create_and_add_to_list(stack_a, size, split_args, 0);
+			if (split_args != NULL)
+				free(split_args);
 		}
-		if (arg[index] != NULL)
-			create_and_add_to_list(stack_a, index, av, 0);
-		index++;
 	}
-	index++;
-	while (ac >= 3 && index < ac)
-	{
-//	dprintf(1, "Try 1: >3: av[%d] %ld\n", index, ft_strtol(av[index], &endptr, 10));	
-		if (av[index] != NULL && (!ft_strtol(av[index], &endptr, 10)))
-		{
-			write(STDERR_FILENO, "Error\n", 6);
-			exit(EXIT_SUCCESS);
-		}
-		create_and_add_to_list(stack_a, index, av, 1);
-		index++;
-	}
+	else
+		create_and_add_to_list(stack_a, ac, av, 1);
 }
 
-void	create_and_add_to_list(t_list **stack_a, int size, char **av, int i)
+void	perform_push_swap(t_list **stack_a, t_list **stack_b, int size)
 {
-	t_list *tmp;
-	int     value;
+	int	*dst;
+	int	*arr;
+	int	i;
 
-	tmp = NULL;
-	while (i < size)
+	i = 0;
+	if (size == 3)
 	{
-		value = ft_atoi(av[i]);
-		tmp = ft_lstnew(&value);
-		ft_lstadd_back(stack_a, tmp);
-		//ft_lstcheck(*stack_a, tmp->content);
-		i++;
+		sort_three(stack_a);
+		return ;
 	}
-	//ft_lst_order(stack_a);
-	//ft_lst_inverted(stack_a);
-	tmp = NULL;
-	
+	if (size == 5)
+	{
+		sort_five(stack_a, stack_b);
+		return ;
+	}
+	dst = ft_copy_cont(*stack_a, size);
+	arr = ft_define_lis(dst, size, &i);
+	ft_move_to_b(stack_a, stack_b, arr, i);
+	ft_move_to_a(stack_a, stack_b);
+	ft_search_min(stack_a, size);
+	free (dst);
+	free (arr);
 }
 
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	//t_stack	stack_b;
+	//t_list	*stack_b;
+	int		size;
 
 	stack_a = NULL;
 	//stack_b = NULL;
+	size = 0;
 	if (ac == 1)
 		exit (EXIT_SUCCESS);
 	else
 		initialize_stack_a(&stack_a, ac, av);
-	exit (EXIT_SUCCESS);
-	//list_of_input = load_ps_data(ac, av);
-	//print_ps_data(list_of_input);
-	//int n = sizeof(12) / sizeof(t_ps_data);
-	//lis(av, n);
+	size = ft_lstsize(stack_a);
+	if (size == 2)
+		return (0);
+	perform_push_swap(&stack_a, &stack_b, size);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 	return (0);
 }

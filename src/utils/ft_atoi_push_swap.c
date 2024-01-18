@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_push_swap.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 13:30:34 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/05/14 18:51:40 by lannur-s         ###   ########.fr       */
+/*   Created: 2024/01/11 15:11:34 by marvin            #+#    #+#             */
+/*   Updated: 2024/01/11 15:11:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <push_swap.h>
 
 static int	ft_isspace(int c)
 {
@@ -18,9 +18,9 @@ static int	ft_isspace(int c)
 		|| c == '\v');
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi_push_swap(const char *str)
 {
-	int	res;
+	long res;
 	int	sign;
 
 	res = 0;
@@ -33,10 +33,20 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
+	if (!ft_isnumber((char *) str))
+	{
+		write(1, "Error. Input is not a number\n", 30);
+		exit (EXIT_FAILURE);
+	}
 	while (ft_isdigit(*str))
 	{
 		res = res * 10 + (*str - '0');
 		str++;
+	}
+	if (res > INT_MAX || res < INT_MIN)
+	{
+	write(1, "Error. Integer overflow\n", 24);
+	exit (EXIT_FAILURE);
 	}
 	return (res * sign);
 }

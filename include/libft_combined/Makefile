@@ -44,6 +44,7 @@ SRCS = src/conversion/ft_atoi.c \
 		src/ctype/ft_isalpha.c \
 		src/ctype/ft_isascii.c \
 		src/ctype/ft_isdigit.c \
+		src/ctype/ft_isnumber.c \
 		src/ctype/ft_isprint.c \
 		src/ctype/ft_tolower.c \
 		src/ctype/ft_toupper.c \

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   push_swap.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -32,11 +32,12 @@ typedef struct s_element
 }	t_element;
 
 /* ****************************   FUNCTIONS   *********************************/
-int			is_not_number(char *input_value);
-int			is_overflow(char *input_value);
+int		ft_atoi_push_swap(const char *str);
+void	create_and_add_to_list(t_list **stack_a, int ac, char **av, int index);
+void	check_duplicate(t_list *stack_a, int value_to_check);
+void	check_sorted(t_list **stack_a);
 
-void		create_and_add_to_list(t_list **stack_a, int size, char **argv, int i);
-
+void	perform_push_swap(t_list **stack_a, t_list **stack_b, int size);
 
 void	swap(t_list **stack);
 void	swap_a(t_list **stack_a);
@@ -56,6 +57,7 @@ void	reverse_rotate_a(t_list **stack_a);
 void	reverse_rotate_b(t_list **stack_b);
 void	reverse_rotate_both(t_list **stack_a, t_list **stack_b);
 
+void	free_stack(t_list **stack);
 
 t_element		*ft_int_lstnew(int content);
 //void	initialize_ps_data(void);
