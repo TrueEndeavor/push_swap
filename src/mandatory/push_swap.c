@@ -37,8 +37,8 @@ void	initialize_stack_a(t_list **stack_a, int ac, char **av)
 
 void	perform_push_swap(t_list **stack_a, t_list **stack_b, int size)
 {
-	int	*dst;
-	int	*arr;
+	//int	*dst;
+	//int	*arr;
 	int	i;
 
 	i = 0;
@@ -52,21 +52,22 @@ void	perform_push_swap(t_list **stack_a, t_list **stack_b, int size)
 		sort_five(stack_a, stack_b);
 		return ;
 	}
-	dst = ft_copy_cont(*stack_a, size);
+	/*dst = ft_copy_cont(*stack_a, size);
 	arr = ft_define_lis(dst, size, &i);
 	ft_move_to_b(stack_a, stack_b, arr, i);
 	ft_move_to_a(stack_a, stack_b);
 	ft_search_min(stack_a, size);
 	free (dst);
-	free (arr);
+	free (arr);*/
 }
 
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	//t_list	*stack_b;
+	t_list	*stack_b;
 	int		size;
 
+dprintf(1, "!---inside main\n");
 	stack_a = NULL;
 	//stack_b = NULL;
 	size = 0;
@@ -76,9 +77,15 @@ int	main(int ac, char **av)
 		initialize_stack_a(&stack_a, ac, av);
 	size = ft_lstsize(stack_a);
 	if (size == 2)
+	{
+		ft_printf("Not enough input to sort\n");
+		return (0);	
+	}
+	dprintf(1, "list size=%d\n", size);	
+	if (size == 2)
 		return (0);
 	perform_push_swap(&stack_a, &stack_b, size);
-	free_stack(&stack_a);
-	free_stack(&stack_b);
+	//free_stack(&stack_a);
+	//free_stack(&stack_b);
 	return (0);
 }

@@ -27,6 +27,8 @@ INCLUDES = -I./include -I$(LIBFT_DIR)/include
 SRCS = src/mandatory/push_swap.c \
 		src/utils/ft_atoi_push_swap.c \
 		src/utils/initialize.c \
+		src/mandatory/sort/sort_three.c \
+		src/mandatory/sort/sort_five.c \
 		src/mandatory/operations/generic_ops.c \
 		src/mandatory/operations/wrapper_push.c \
 		src/mandatory/operations/wrapper_reverse_rotate.c \

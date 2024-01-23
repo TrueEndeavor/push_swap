@@ -38,6 +38,8 @@ void	check_duplicate(t_list *stack_a, int value_to_check);
 void	check_sorted(t_list **stack_a);
 
 void	perform_push_swap(t_list **stack_a, t_list **stack_b, int size);
+void	sort_three(t_list **stack_a);
+void	sort_five(t_list **stack_a, t_list **stack_b);
 
 void	swap(t_list **stack);
 void	swap_a(t_list **stack_a);

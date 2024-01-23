@@ -17,7 +17,10 @@ void	check_duplicate(t_list *stack_a, int value_to_check)
 	while (stack_a->next != NULL)
 	{
 		if (stack_a->content == value_to_check)
+		{
+			ft_printf("Duplicate found\n");
 			exit (EXIT_SUCCESS);
+		}
 		stack_a = stack_a->next;
 	}
 	return ;
@@ -37,7 +40,26 @@ void	check_sorted(t_list **stack_a)
 		tmp = tmp->next;
 		tmp2 = tmp2->next;
 	}
+	ft_printf("Already sorted\n");
 	exit(0);
+}
+
+void	sort_input(t_list **stack_a)
+{
+	t_list	*current_node;
+	t_list	*next_node;
+
+	current_node = *stack_a;
+	next_node = current_node->next;
+	while (next_node != NULL)
+	{
+		if (current_node->content < next_node->content)
+			return ;
+		current_node = current_node->next;
+		next_node = next_node->next;
+	}
+	swap(stack_a);
+	return ;
 }
 
 void	create_and_add_to_list(t_list **stack_a, int ac, char **av, int index)
@@ -45,6 +67,7 @@ void	create_and_add_to_list(t_list **stack_a, int ac, char **av, int index)
 	t_list *tmp;
 	int     value;
 
+dprintf(1, "!---create_and_add_to_list\n");
 	tmp = NULL;
 	dprintf(1, "...ac=%d\n", ac);
 	dprintf(1, "...index=%d\n", index);	
@@ -57,6 +80,6 @@ void	create_and_add_to_list(t_list **stack_a, int ac, char **av, int index)
 		index++;
 	}
 	check_sorted(stack_a);
-	//ft_lst_inverted(stack_a);
+	sort_input(stack_a);
 	tmp = NULL;
 }
