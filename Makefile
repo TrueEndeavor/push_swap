@@ -25,19 +25,25 @@ LIBFT_DIR = ./include/libft_combined
 INCLUDES = -I./include -I$(LIBFT_DIR)/include
 
 SRCS = src/mandatory/push_swap.c \
-		src/utils/ft_atoi_push_swap.c \
-		src/utils/initialize.c \
-		src/mandatory/sort/sort_three.c \
-		src/mandatory/sort/sort_five.c \
 		src/mandatory/operations/generic_ops.c \
 		src/mandatory/operations/wrapper_push.c \
 		src/mandatory/operations/wrapper_reverse_rotate.c \
 		src/mandatory/operations/wrapper_rotate.c \
-		src/mandatory/operations/wrapper_swap.c		
+		src/mandatory/operations/wrapper_swap.c	\
+		src/mandatory/sort/sort_three.c \
+		src/mandatory/sort/sort_five.c \
+		src/mandatory/d/o1.c \
+		src/mandatory/d/o2.c \
+		src/mandatory/d/o3.c \
+		src/mandatory/lis.c \
+		src/utils/error.c \
+		src/utils/free_stack.c \
+		src/utils/ft_atoi_push_swap.c \
+		src/utils/initialize.c
 #		src/mandatory/free.c \
 #		src/mandatory/print.c \
 
-BONUS_SRCS = src/bonus/checker.c \
+BONUS_SRCS = src/bonus/checker.c
 		
 OBJS = $(SRCS:%.c=%.o)
 

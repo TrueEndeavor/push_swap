@@ -20,8 +20,8 @@ void	sort_five(t_list **stack_a, t_list **stack_b)
 	while (i-- > 0)
 		push(stack_a, stack_b);
 	sort_three(stack_a);
-	//ft_move_to_a(stack_a, stack_b);
-	//ft_search_min(stack_a, ft_lstsize(*stack_a));
+	ft_move_to_a(stack_a, stack_b);
+	ft_search_min(stack_a, ft_lstsize(*stack_a));
 }
 
 void	ft_move_to_a(t_list **stack_a, t_list **stack_b)
@@ -33,7 +33,7 @@ void	ft_move_to_a(t_list **stack_a, t_list **stack_b)
 	i = 0;
 	size_a = ft_lstsize(*stack_a);
 	size_b = ft_lstsize(*stack_b);
-	/* while (*stack_b != NULL)
+	while (*stack_b != NULL)
 	{
 		i = ft_best_nbr_b(stack_b, size_b, stack_a, size_a);
 		if (i < 0)
@@ -63,6 +63,6 @@ void	ft_move_to_b(t_list **stack_a, t_list **stack_b, int *arr, int max)
 				rotate(stack_a);
 		}
 		push(stack_a, stack_b);
-		//i = ft_best_nbr_a(*stack_a, --size_a, arr, max);
-	} */
+		i = ft_best_nbr_a(*stack_a, --size_a, arr, max);
+	}
 }

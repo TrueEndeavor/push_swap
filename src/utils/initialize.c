@@ -64,13 +64,10 @@ void	sort_input(t_list **stack_a)
 
 void	create_and_add_to_list(t_list **stack_a, int ac, char **av, int index)
 {
-	t_list *tmp;
-	int     value;
+	t_list	*tmp;
+	int		value;
 
-dprintf(1, "!---create_and_add_to_list\n");
 	tmp = NULL;
-	dprintf(1, "...ac=%d\n", ac);
-	dprintf(1, "...index=%d\n", index);	
 	while (index < ac)
 	{	
 		value = ft_atoi_push_swap(av[index]);

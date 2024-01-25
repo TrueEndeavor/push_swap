@@ -6,54 +6,77 @@
 /*   By: lannur-s <lannur-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:40:04 by lannur-s          #+#    #+#             */
-/*   Updated: 2023/11/15 14:50:41 by lannur-s         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:59:52 by lannur-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <push_swap.h>
+#include "push_swap.h"
 
-int	_lis(int arr[], int n, int *max_ref)
+int	*ft_lis_util_helper(int max)
+{
+	int	*val;
+
+	val = (int *) ft_calloc (1, sizeof(int) * (max + 1));
+	if (!val)
+		exit (0);
+	val[max - 1] = 2147483647;
+	return (val);
+}
+
+int	*ft_lis_util(int *dst, int *arr, int max, int size)
 {
 	int	i;
-	int	res;
-	int	max_ending_here;
+	int	j;
+	int	*val;
+	int	x;
 
-	if (n == 1)
-		return (1);
-
-	i = 1;
-	res = 1;
-	max_ending_here = 1;
-	while (i < n)
+	j = size;
+	val = ft_lis_util_helper(max - 1);
+	while (max-- >= 1)
 	{
-		res = _lis(arr, i, max_ref);
-		if (arr[i - 1] < arr[n - 1] && res + 1 > max_ending_here)
-			max_ending_here = res + 1;
-	i++;
+		i = j;
+		x = 0;
+		while (--i >= 0)
+		{
+			if (arr[i] == max && ((dst[i] < val[max])
+					|| val[max - 1] == 2147483647)
+				&& ((dst[i] > val[max - 1]) || (x == 0)))
+			{
+				val[max - 1] = dst[i];
+				j = i;
+				x = 1;
+			}
+		}
 	}
-	if (*max_ref < max_ending_here)
-		*max_ref = max_ending_here;
-	return (max_ending_here);
+	free(arr);
+	return (val);
 }
 
-int	lis(int arr[], int n)
+int	*ft_define_lis(int *dst, int size, int *max)
 {
-	int	max;
+	int	*arr;
+	int	i;
+	int	j;
 
-	max = 1;
-	_lis(arr, n, &max);
-	return (max);
-}
-
-#include <stdio.h>
-
-// Driver program to test above function
-int main()
-{
-    int arr[] = { 10, 22, 9, 33, 21, 50, 41, 60, 71};
-    int n = sizeof(arr) / sizeof(arr[0]);
- 
-    // Function call
-    printf("Length of lis is %d", lis(arr, n));
-    return 0;
+	i = 0;
+	j = -1;
+	arr = (int *) malloc (sizeof(int) * size);
+	if (!arr)
+		exit (0);
+	while (i < size)
+		arr[i++] = 1;
+	while (++j < size)
+	{
+		i = j - 1;
+		while (++i < size)
+		{
+			if (dst[j] < dst[i] && arr[j] == arr[i])
+			{
+				arr[i] += 1;
+				if (arr[i] > *max)
+					*max = arr[i];
+			}
+		}
+	}
+	return (ft_lis_util(dst, arr, *max + 1, size));
 }
